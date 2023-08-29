@@ -1,6 +1,16 @@
 import contactService from "./contacts.js";
+import { program } from "commander";
 
-// const argv = require('yargs').argv;
+program
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
+
+program.parse();
+
+const argv = program.opts();
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
@@ -30,8 +40,4 @@ async function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-// invokeAction(argv);
-
-// invokeAction({ action: "list" });
-invokeAction({action: "remove",  id: "hcLPbQWfbrHMKUbDFOvZ9"})
-// invokeAction({action: "add",  name: 'qweqwe', email: 'qweqwer@Comment.ua', phone: '213123123'})
+invokeAction(argv);
